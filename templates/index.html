@@ -1,0 +1,49 @@
+
+<form  method="post">
+
+<table>
+    <tr>
+        <td>تعديل المؤلف</td>
+        <td>
+        <select name="author_name_id">
+            {% for i in range(length)  %}
+            <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
+    </td>
+        <td><input type="text" name="author_name_text" id=""></td>
+        <td><input type="submit" name="author_btn" value="تعديل المؤلف"></td>
+    </tr>
+    <tr>
+        <td>تعديل البلد</td>
+        <td>
+            <select name="national_name_id">
+                {% for i in range(length)  %}
+                <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td><input type="text" name="national_name_text" id=""></td>
+        <td><input type="submit" name="national_btn" value="تعديل البلد"></td>
+    </tr>
+    <tr>
+        <td>تعديل الكتاب</td>
+        <td> 
+        <select name="book_name_id">
+            {% for i in range(length)  %}
+            <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
+       </td>
+        <td><input type="text" name="book_name_text" id=""></td>
+        <td><input type="submit" name="book_btn" value="تعديل الكتاب"></td>
+    </tr>
+</table>
+   
+</form>
+
+{{data|safe}}
+
+
+
+

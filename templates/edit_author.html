@@ -1,0 +1,26 @@
+
+<form  method="post">
+
+    <table>
+        <tr>
+            <td>تعديل المؤلف</td>
+            <td>
+            <select name="author_name_id">
+                {% for i in range(length)  %}
+                <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+        </td>
+            <td><input type="text" name="author_name_text" id=""></td>
+        </tr>
+        <td><input type="submit" name="submit_button" value="تعديل"></td>
+    </table>
+       
+    </form>
+    
+    {{data|safe}}
+    
+    
+    
+    
+    
