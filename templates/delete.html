@@ -10,6 +10,8 @@
                 </select>
             </td>
             <td><input type="submit" name="author_btn" value="مسح"></td>
+            <td>                <p><a href="{{url_for('create_form')}}"> Create page </a>| <a href="{{url_for('edit_author_national_book_form')}}"> Update page </a>|<a href="{{url_for('get_table')}}"> page </a></p>
+            </td>
         </tr>
     </table>
     {{data|safe}}

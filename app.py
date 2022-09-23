@@ -6,6 +6,15 @@ import pandas as pd
 
 app = Flask(__name__)
 
+@app.route('/')
+def home_page():
+    return render_template('index.html')
+
+@app.route('/get')
+def get_table():
+    dataset = pd.read_excel('Book_list.xlsx', index_col=False) # read a excel file 
+    return render_template('get.html', data=dataset.to_html())
+
 @app.route('/edit', methods=['GET','POST'])
 def edit_author_national_book_form():
     author_name_id  = request.form.get('author_name_id')
@@ -37,7 +46,7 @@ def edit_author_national_book_form():
             dataset['الرواية'][book_name_id] = book_name_text
             dataset.to_excel('Book_list.xlsx', index=False)
    
-    return render_template('index.html',
+    return render_template('edit.html',
      data=dataset.to_html(), 
      length=length)
 
