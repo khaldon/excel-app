@@ -1,7 +1,5 @@
 
-from crypt import methods
-from operator import index
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd 
 
 app = Flask(__name__)
@@ -17,38 +15,39 @@ def get_table():
 
 @app.route('/edit', methods=['GET','POST'])
 def edit_author_national_book_form():
-    author_name_id  = request.form.get('author_name_id')
-    author_name_text = request.form.get('author_name_text')
-    national_name_id  = request.form.get('national_name_id')
-    national_name_text = request.form.get('national_name_text')
-    book_name_id  = request.form.get('national_name_id')
-    book_name_text = request.form.get('national_name_text')
+    author_name_id  = request.form.get('author_name_id', False)
+    author_name_text = request.form.get('author_name_text', False)
+    # national_name_id  = request.form.get('national_name_id', False)
+    national_name_text = request.form.get('national_name_text', False)
+    # book_name_id  = request.form.get('national_name_id', False)
+    book_name_text = request.form.get('book_name_text', False)
     dataset = pd.read_excel('Book_list.xlsx', index_col=False) # read a excel file 
     dataset = dataset[['الرواية', 'المؤلف', 'البلد']] # selecting the column will be shown 
 
     length  = dataset.shape[0] # getting a length of the table 
 
-    if request.method == 'POST' and author_name_text != '': # checking if post method and the input text is not empty 
-        if request.form['author_btn'] == "تعديل المؤلف" :
+    if request.method == 'POST': # checking if post method and the input text is not empty 
+        if request.form['author_btn'] == "تعديل" and author_name_text != ''  and national_name_text != '' and book_name_text != '':
             author_name_id = int(author_name_id) # converting the the output to be a interger to be input to the next line  
             dataset['المؤلف'][author_name_id] = author_name_text
             dataset.to_excel('Book_list.xlsx', index=False)
-        
-    if request.method == 'POST' and national_name_text != '':   
-        if request.form['national_btn'] == "تعديل البلد" :
-            national_name_id = int(national_name_id)
-            dataset['البلد'][national_name_id] = national_name_text
+
+            dataset['البلد'][author_name_id] = national_name_text
             dataset.to_excel('Book_list.xlsx', index=False)
 
-    if request.method == 'POST' and book_name_text != '':
-        if request.form['book_btn'] == "تعديل الكتاب" :
-            book_name_id = int(book_name_id)
-            dataset['الرواية'][book_name_id] = book_name_text
+            dataset['الرواية'][author_name_id] = book_name_text
             dataset.to_excel('Book_list.xlsx', index=False)
-   
-    return render_template('edit.html',
-     data=dataset.to_html(), 
-     length=length)
+            return redirect(url_for("get_table"))
+        
+        else:
+            return render_template('edit.html',
+        data=dataset.to_html(), 
+            length=length)
+
+    else:
+        return render_template('edit.html',
+        data=dataset.to_html(), 
+            length=length)
 
 @app.route('/delete', methods=['GET', 'POST'])
 def delete_form():
