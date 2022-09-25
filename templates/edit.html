@@ -1,6 +1,4 @@
-
 <form  method="post">
-
 <table>
     <tr>
         <td>تعديل المؤلف</td>
@@ -12,31 +10,18 @@
         </select>
     </td>
         <td><input type="text" name="author_name_text" id=""></td>
-        <td><input type="submit" name="author_btn" value="تعديل المؤلف"></td>
     </tr>
     <tr>
         <td>تعديل البلد</td>
-        <td>
-            <select name="national_name_id">
-                {% for i in range(length)  %}
-                <option value="{{i}}">{{i}}</option>
-                {% endfor %}
-            </select>
-        </td>
+        <td></td>
         <td><input type="text" name="national_name_text" id=""></td>
-        <td><input type="submit" name="national_btn" value="تعديل البلد"></td>
+        <td><input type="submit" name="author_btn" value="تعديل"></td>
+
     </tr>
     <tr>
         <td>تعديل الكتاب</td>
-        <td> 
-        <select name="book_name_id">
-            {% for i in range(length)  %}
-            <option value="{{i}}">{{i}}</option>
-            {% endfor %}
-        </select>
-       </td>
+        <td></td>
         <td><input type="text" name="book_name_text" id=""></td>
-        <td><input type="submit" name="book_btn" value="تعديل الكتاب"></td>
     </tr>
 </table>
 <p><a href="{{url_for('create_form')}}"> Create page </a>| <a href="{{url_for('get_table')}}"> page </a>|<a href="{{url_for('delete_form')}}"> Delete page </a></p>
